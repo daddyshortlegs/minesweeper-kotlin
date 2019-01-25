@@ -1,5 +1,6 @@
-class Minesweeper(input: String) {
+class Minesweeper(val input: String) {
     fun execute(): String {
-        return ""
+        val board = Board(input)
+        return board.generate()
     }
 }

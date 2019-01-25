@@ -21,52 +21,28 @@ class Board(private val input: String) {
 
         return board
     }
-
-    override fun toString(): String {
-        var result = ""
-        for (i in 0 until size) {
-            for (j in 0 until size) {
-                result += board[i][j]
-            }
-            result += "\n"
-        }
-
-        return result
-    }
-
-    fun countSides(x: Int, y: Int) : Int {
-        var count = countLeft(x, y)
-        count += countRight(x, y)
-        return count
-    }
     
-    private fun countLeft(x: Int, y: Int): Int {
-        if (x > 0) {
-            if (countSide(x - 1, y)) return 1
-        }
-        return 0
-    }
+    fun generate(): String {
+        for (y in 0 until board.size) {
+            for (x in 0 until board[y].size) {
+                var count = countAbove(x, y)
+                count += countBelow(x, y)
+                count += countSides(x, y)
 
-    private fun countRight(x: Int, y: Int): Int {
-        if (x < board[y].size - 1) {
-            if (countSide(x + 1, y)) return 1
+                if (board[y][x] != '*') {
+                    board[y][x] = convertIntToChar(count)
+                }
+            }
         }
-        return 0
-    }
-
-    private fun countSide(x: Int, y: Int): Boolean {
-        if (board[y][x] == '*') {
-            return true
-        }
-        return false
-    }
-
-    fun countBelow(x: Int, y: Int): Int {
-        return countRow(x, y + 1)
+        return toString()
     }
 
     fun countAbove(x: Int, y: Int): Int {
         return countRow(x, y - 1)
+    }
+
+    fun countBelow(x: Int, y: Int): Int {
+        return countRow(x, y + 1)
     }
 
     private fun countRow(x: Int, row: Int): Int {
@@ -94,5 +70,51 @@ class Board(private val input: String) {
 
         return count
     }
+
+    fun countSides(x: Int, y: Int) : Int {
+        var count = countLeft(x, y)
+        count += countRight(x, y)
+        return count
+    }
+
+    private fun countLeft(x: Int, y: Int): Int {
+        if (x > 0) {
+            if (countSide(x - 1, y)) return 1
+        }
+        return 0
+    }
+
+    private fun countRight(x: Int, y: Int): Int {
+        if (x < board[y].size - 1) {
+            if (countSide(x + 1, y)) return 1
+        }
+        return 0
+    }
+
+    private fun countSide(x: Int, y: Int): Boolean {
+        if (board[y][x] == '*') {
+            return true
+        }
+        return false
+    }
+
+    fun convertIntToChar(count: Int) = Integer.toString(count).single()
+
+    override fun toString(): String {
+        var result = ""
+        for (i in 0 until size) {
+            for (j in 0 until size) {
+                result += board[i][j]
+            }
+            result += "\n"
+        }
+
+        return result
+    }
+
+
+
+
+
 
 }

@@ -14,6 +14,32 @@ class BoardTest {
 
 
     @Test
+    fun `convert to char`() {
+        val input = "....\n" +
+                ".*.*\n" +
+                "....\n" +
+                "....\n"
+        val board = Board(input)
+        val char: Char = board.convertIntToChar(3)
+
+        assertEquals('3', char)
+    }
+
+
+    @Test
+    fun `convert array to string`() {
+        val input = "....\n" +
+                ".*.*\n" +
+                "....\n" +
+                "....\n"
+
+        val board = Board(input)
+        val result = board.toString()
+
+        assertEquals(input, result)
+    }
+
+    @Test
     fun `calculate value`() {
         val input = "....\n" +
                 ".*.*\n" +
