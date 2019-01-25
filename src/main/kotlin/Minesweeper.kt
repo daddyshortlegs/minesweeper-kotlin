@@ -1,5 +1,5 @@
 class Minesweeper(val input: String) {
-    fun execute(): String {
+    fun play(): String {
         val boardReader = BoardReader()
         val boards = boardReader.readBoards(input)
         return generateOutput(boards)

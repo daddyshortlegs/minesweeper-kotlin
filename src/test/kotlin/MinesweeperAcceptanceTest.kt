@@ -1,5 +1,4 @@
 import org.junit.Assert.assertEquals
-import org.junit.Ignore
 import org.junit.Test
 
 class MinesweeperAcceptanceTest {
@@ -18,7 +17,7 @@ class MinesweeperAcceptanceTest {
                 "0 0"
 
         val board = Minesweeper(input)
-        val actualOutput = board.execute()
+        val actualOutput = board.play()
 
         val expectedOutput = "Field #1:\n" +
                 "*100\n" +
