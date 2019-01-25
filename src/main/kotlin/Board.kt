@@ -3,18 +3,22 @@ class Board(private val input: String) {
         convertToArray()
     }
 
-    private var size: Int = 0
+    private var height: Int = 0
+
+    private var width: Int = 0
 
     private lateinit var board: Array<CharArray>
 
     private fun convertToArray() : Array<CharArray> {
         val trimEnd = input.trimEnd('\n')
         val lines = trimEnd.split("\n")
-        size = lines.size
-        board = Array(size, {CharArray(size)})
+        height = lines.size
+        width = lines[0].length
 
-        for (i in 0 until size) {
-            for (j in 0 until size) {
+        board = Array(height, {CharArray(height)})
+
+        for (i in 0 until height) {
+            for (j in 0 until width) {
                 board[i][j] = lines[i][j]
             }
         }
@@ -23,8 +27,8 @@ class Board(private val input: String) {
     }
 
     fun generate(): String {
-        for (y in 0 until board.size) {
-            for (x in 0 until board[y].size) {
+        for (y in 0 until height) {
+            for (x in 0 until width) {
                 var count = countAbove(x, y)
                 count += countBelow(x, y)
                 count += countSides(x, y)
@@ -47,7 +51,7 @@ class Board(private val input: String) {
 
     private fun countRow(x: Int, row: Int): Int {
         if (row < 0) return 0
-        if (row >= board.size) return 0
+        if (row >= height) return 0
 
         var startX = x - 1
         var endX = startX + 3
@@ -56,8 +60,8 @@ class Board(private val input: String) {
             endX = startX + 2
         }
 
-        if (endX >= board[row].size) {
-            endX = board[row].size - 1
+        if (endX >= width) {
+            endX = width - 1
         }
 
         return countTheRow(startX, endX, row)
@@ -105,8 +109,8 @@ class Board(private val input: String) {
 
     override fun toString(): String {
         var result = ""
-        for (i in 0 until size) {
-            for (j in 0 until size) {
+        for (i in 0 until height) {
+            for (j in 0 until width) {
                 result += board[i][j]
             }
             result += "\n"

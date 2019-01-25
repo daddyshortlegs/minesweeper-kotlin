@@ -25,6 +25,23 @@ class BoardReaderTest {
         assertEquals(expectedBoard, board.toString())
     }
 
+    @Test
+    fun `should read board of 3 by 5 dimensions`() {
+        val boardReader = BoardReader()
+
+        val expectedBoard = "*..\n" +
+                "...\n" +
+                ".*.\n" +
+                "...\n" +
+                ".*.\n"
+
+        val input = "3 5\n" + expectedBoard
+
+        var board: Board = boardReader.read(input)
+
+        assertEquals(expectedBoard, board.toString())
+    }
+
 
 //    @Test
 //    fun `should return 4 by 4 dimensions`() {
