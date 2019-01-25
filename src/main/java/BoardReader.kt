@@ -7,40 +7,47 @@ class BoardReader {
             throw NoBoardsException()
         }
 
-        val trimEnd = input.trimEnd('\n')
-        val lines = trimEnd.split("\n")
+        val lines = cleanUpInput(input)
 
 
         var index = 0
-
         val line = lines[index]
-
-        val (width, height) = readDimensions(line)
+        val height = readDimensions(line)
         index++
 
-        var board = ""
-        for (i in index until index + height) {
-            board += lines[i] + "\n"
-            index++
-        }
+        val board = readBoard(index, height, lines)
+        index+=height
 
-        println("board = $board")
-
-        return Board(board)
+        return board
     }
 
-    private fun readDimensions(line: String): Dimensions {
+    private fun cleanUpInput(input: String): List<String> {
+        val trimEnd = input.trimEnd('\n')
+        return trimEnd.split("\n")
+    }
+
+    private fun readDimensions(line: String): Int {
         val regex = Regex("([0-9]) ([0-9])")
         if (regex.matches(line)) {
             // is header
             val result = regex.find(line)
             if (result != null) {
                 var (width, height) = result.destructured
-                return Dimensions(Integer.parseInt(width), Integer.parseInt(height))
+                return height.toInt()
             }
         }
-        return Dimensions(0, 0)
+        return 0
     }
+
+    private fun readBoard(index: Int, height: Int, lines: List<String>): Board {
+        var board = ""
+        for (i in index until index + height) {
+            board += lines[i] + "\n"
+        }
+
+        return Board(board)
+    }
+
 
 }
 
