@@ -34,18 +34,18 @@ class Board(private val input: String) {
         return result
     }
 
-    fun calculateAtPoint(boardArray: CharArray, i: Int) : Int {
+    fun calculateAtPoint(x: Int, y: Int) : Int {
         var count = 0
 
-        if (i > 0) {
-            val pointLeft = boardArray[i - 1]
+        if (x > 0) {
+            val pointLeft = board[y][x - 1]
             if (pointLeft == '*') {
                 count++
             }
         }
 
-        if (i < boardArray.size - 1) {
-            val pointRight = boardArray[i + 1]
+        if (x < board[y].size - 1) {
+            val pointRight = board[y][x + 1]
             if (pointRight == '*') {
                 count++
             }

@@ -15,22 +15,35 @@ class BoardTest {
 
     @Test
     fun `calculate value`() {
-        val board = Board(".*.")
-        val result = board.calculateAtPoint(charArrayOf('.', '*', '.', '*'), 2)
+        val input = "....\n" +
+                ".*.*\n" +
+                "....\n" +
+                "....\n"
+
+        val board = Board(input)
+        val result = board.calculateAtPoint(2, 1)
         assertEquals(2, result)
     }
 
     @Test
     fun `calculate value on left bounds`() {
-        val board = Board(".*.")
-        val result = board.calculateAtPoint(charArrayOf('.', '*', '.', '*'), 0)
+        val input = "....\n" +
+                ".*.*\n" +
+                "....\n" +
+                "....\n"
+        val board = Board(input)
+        val result = board.calculateAtPoint(0, 1)
         assertEquals(1, result)
     }
 
     @Test
     fun `calculate value on right bounds`() {
-        val board = Board(".*.")
-        val result = board.calculateAtPoint(charArrayOf('.', '*', '*', '.'), 3)
+        val input = "....\n" +
+                ".**.\n" +
+                "....\n" +
+                "....\n"
+        val board = Board(input)
+        val result = board.calculateAtPoint(3, 1)
         assertEquals(1, result)
     }
 
