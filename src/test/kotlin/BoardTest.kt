@@ -61,6 +61,20 @@ class BoardTest {
     }
 
     @Test
+    fun `should count and ignore left bound`() {
+        val input = "....\n" +
+                "***.\n" +
+                "*...\n" +
+                "....\n"
+
+        val board = Board(input)
+        val result = board.countBelow(0, 0)
+
+        assertEquals(2, result)
+    }
+
+
+    @Test
     fun `should not count above when on top line`() {
         val input = "....\n" +
                 "***.\n" +

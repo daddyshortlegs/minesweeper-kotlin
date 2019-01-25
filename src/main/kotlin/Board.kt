@@ -66,13 +66,17 @@ class Board(private val input: String) {
         if (row < 0) return 0
         if (row >= board.size) return 0
 
-        val startX = x - 1
-        val endX = startX + 3
+        var startX = x - 1
+        var endX = startX + 3
+        if (x == 0) {
+            startX = 0
+            endX = startX + 2
+        }
+
         var count = 0
 
         for (i in startX until endX) {
-            val c = board[row][i]
-            if (c == '*') {
+            if (board[row][i] == '*') {
                 count++
             }
         }
