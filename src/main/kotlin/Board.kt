@@ -42,22 +42,23 @@ class Board(private val input: String) {
     
     private fun countLeft(x: Int, y: Int): Int {
         if (x > 0) {
-            val pointLeft = board[y][x - 1]
-            if (pointLeft == '*') {
-                return 1
-            }
+            if (countSide(x - 1, y)) return 1
         }
         return 0
     }
 
     private fun countRight(x: Int, y: Int): Int {
         if (x < board[y].size - 1) {
-            val pointRight = board[y][x + 1]
-            if (pointRight == '*') {
-                return 1
-            }
+            if (countSide(x + 1, y)) return 1
         }
         return 0
+    }
+
+    private fun countSide(x: Int, y: Int): Boolean {
+        if (board[y][x] == '*') {
+            return true
+        }
+        return false
     }
 
     fun countBelow(x: Int, y: Int): Int {
