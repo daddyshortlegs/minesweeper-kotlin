@@ -21,7 +21,7 @@ class Board(private val input: String) {
 
         return board
     }
-    
+
     fun generate(): String {
         for (y in 0 until board.size) {
             for (x in 0 until board[y].size) {
@@ -60,6 +60,10 @@ class Board(private val input: String) {
             endX = board[row].size - 1
         }
 
+        return countTheRow(startX, endX, row)
+    }
+
+    private fun countTheRow(startX: Int, endX: Int, row: Int): Int {
         var count = 0
 
         for (i in startX until endX) {
@@ -67,7 +71,6 @@ class Board(private val input: String) {
                 count++
             }
         }
-
         return count
     }
 
