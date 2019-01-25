@@ -2,23 +2,32 @@ data class Dimensions(val width: Int, val height: Int)
 
 
 class BoardReader {
-    fun read(input: String): Board {
+
+    fun readBoards(input: String): List<Board> {
         if (input.isEmpty()) {
             throw NoBoardsException()
         }
 
         val lines = cleanUpInput(input)
 
-
         var index = 0
-        val line = lines[index]
-        val height = readDimensions(line)
-        index++
 
-        val board = readBoard(index, height, lines)
-        index+=height
+        var boards: ArrayList<Board> = ArrayList()
 
-        return board
+        do {
+            val line = lines[index]
+            val height = readDimensions(line)
+            index++
+
+            val board = readBoard(index, height, lines)
+
+            index += height
+
+
+            boards.add(board)
+        } while (index < lines.size)
+
+        return boards
     }
 
     private fun cleanUpInput(input: String): List<String> {
@@ -47,6 +56,7 @@ class BoardReader {
 
         return Board(board)
     }
+
 
 
 }

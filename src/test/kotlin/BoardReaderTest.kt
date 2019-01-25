@@ -6,7 +6,7 @@ class BoardReaderTest {
     @Test(expected=NoBoardsException::class)
     fun `should throw error if no input`() {
         val boardReader = BoardReader()
-        boardReader.read("")
+        boardReader.readBoards("")
     }
 
     @Test
@@ -20,9 +20,9 @@ class BoardReaderTest {
 
         val input = "4 4\n" + expectedBoard
 
-        var board: Board = boardReader.read(input)
+        var board = boardReader.readBoards(input)
 
-        assertEquals(expectedBoard, board.toString())
+        assertEquals(expectedBoard, board[0].toString())
     }
 
     @Test
@@ -37,26 +37,38 @@ class BoardReaderTest {
 
         val input = "3 5\n" + expectedBoard
 
-        var board: Board = boardReader.read(input)
+        var board = boardReader.readBoards(input)
 
-        assertEquals(expectedBoard, board.toString())
+        assertEquals(expectedBoard, board[0].toString())
     }
 
 
-//    @Test
-//    fun `should return 4 by 4 dimensions`() {
-//        val boardReader = BoardReader()
-//
-//        val input = "4 4\n" +
-//                "*...\n" +
-//                "....\n" +
-//                ".*..\n" +
-//                "...."
-//        val (width, height) = boardReader.readDimensions(input)
-//
-//        assertEquals(4, width)
-//        assertEquals(4, height)
-//    }
+    @Test
+    fun `should read 2 boards`() {
+        val boardReader = BoardReader()
+
+        val board1 = "*...\n" +
+                "....\n" +
+                ".*..\n" +
+                "....\n"
+
+        val board2 = "*..\n" +
+                "...\n" +
+                ".*.\n" +
+                "...\n" +
+                ".*.\n"
+
+        val input = "4 4\n" + board1 +
+                "3 5\n" + board2
+
+        val boards = boardReader.readBoards(input)
+
+        assertFalse(boards.isEmpty())
+        assertEquals(2, boards.size)
+        assertEquals(board1, boards[0].toString())
+        assertEquals(board2, boards[1].toString())
+
+    }
 
 
 
