@@ -1,6 +1,3 @@
-data class Dimensions(val width: Int, val height: Int)
-
-
 class BoardReader {
 
     fun readBoards(input: String): List<Board> {
@@ -22,8 +19,7 @@ class BoardReader {
         var boards: ArrayList<Board> = ArrayList()
 
         do {
-            val line = lines[index]
-            val height = readDimensions(line)
+            val height = readDimensions(lines[index])
             if (height == 0) return boards
             index++
             val board = readBoard(index, height, lines)
@@ -38,7 +34,6 @@ class BoardReader {
     private fun readDimensions(line: String): Int {
         val regex = Regex("([0-9]) ([0-9])")
         if (regex.matches(line)) {
-            // is header
             val result = regex.find(line)
             if (result != null) {
                 var (height, width) = result.destructured
@@ -56,8 +51,5 @@ class BoardReader {
 
         return Board(board)
     }
-
-
-
 }
 

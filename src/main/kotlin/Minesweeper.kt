@@ -10,10 +10,15 @@ class Minesweeper(val input: String) {
         var index = 1
         for (board in boards) {
             if (index > 1) { result += "\n" }
-            result += "Field #$index:\n"
-            result += board.generate()
+            result += generateSingleBoard(index, board)
             index++
         }
+        return result
+    }
+
+    private fun generateSingleBoard(index: Int, board: Board): String {
+        var result = "Field #$index:\n"
+        result += board.generate()
         return result
     }
 }
