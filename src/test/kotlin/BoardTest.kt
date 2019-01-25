@@ -21,7 +21,7 @@ class BoardTest {
                 "....\n"
 
         val board = Board(input)
-        val result = board.calculateAtPoint(2, 1)
+        val result = board.countSides(2, 1)
         assertEquals(2, result)
     }
 
@@ -32,7 +32,7 @@ class BoardTest {
                 "....\n" +
                 "....\n"
         val board = Board(input)
-        val result = board.calculateAtPoint(0, 1)
+        val result = board.countSides(0, 1)
         assertEquals(1, result)
     }
 
@@ -43,7 +43,7 @@ class BoardTest {
                 "....\n" +
                 "....\n"
         val board = Board(input)
-        val result = board.calculateAtPoint(3, 1)
+        val result = board.countSides(3, 1)
         assertEquals(1, result)
     }
 

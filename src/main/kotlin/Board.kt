@@ -34,24 +34,30 @@ class Board(private val input: String) {
         return result
     }
 
-    fun calculateAtPoint(x: Int, y: Int) : Int {
-        var count = 0
-
+    fun countSides(x: Int, y: Int) : Int {
+        var count = countLeft(x, y)
+        count += countRight(x, y)
+        return count
+    }
+    
+    private fun countLeft(x: Int, y: Int): Int {
         if (x > 0) {
             val pointLeft = board[y][x - 1]
             if (pointLeft == '*') {
-                count++
+                return 1
             }
         }
+        return 0
+    }
 
+    private fun countRight(x: Int, y: Int): Int {
         if (x < board[y].size - 1) {
             val pointRight = board[y][x + 1]
             if (pointRight == '*') {
-                count++
+                return 1
             }
         }
-
-        return count
+        return 0
     }
 
     fun countBelow(x: Int, y: Int): Int {
