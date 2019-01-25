@@ -3,18 +3,18 @@ class Board(private val input: String) {
         convertToArray()
     }
 
-    var size: Int = 0
+    private var size: Int = 0
 
-    lateinit var board: Array<CharArray>
+    private lateinit var board: Array<CharArray>
 
-    fun convertToArray() : Array<CharArray> {
+    private fun convertToArray() : Array<CharArray> {
         val trimEnd = input.trimEnd('\n')
         val lines = trimEnd.split("\n")
         size = lines.size
         board = Array(size, {CharArray(size)})
 
-        for (i in 0..size - 1) {
-            for (j in 0..(size - 1)) {
+        for (i in 0 until size) {
+            for (j in 0 until size) {
                 board[i][j] = lines[i][j]
             }
         }
@@ -24,8 +24,8 @@ class Board(private val input: String) {
 
     override fun toString(): String {
         var result = ""
-        for (i in 0..size - 1) {
-            for (j in 0..size - 1) {
+        for (i in 0 until size) {
+            for (j in 0 until size) {
                 result += board[i][j]
             }
             result += "\n"
@@ -55,36 +55,29 @@ class Board(private val input: String) {
     }
 
     fun countBelow(x: Int, y: Int): Int {
-        val rowBelow = y + 1
-        val startX = x - 1
-        val endX = startX + 3
-        var count = 0
-
-        for (i in startX..endX - 1) {
-            val c = board[rowBelow][i]
-            if (c == '*') {
-                count++
-            }
-        }
-
-        return count
+        return countRow(x, y + 1)
     }
 
     fun countAbove(x: Int, y: Int): Int {
-        val rowAbove = y - 1
+        return countRow(x, y - 1)
+    }
+
+    private fun countRow(x: Int, row: Int): Int {
+        if (row < 0) return 0
+        if (row >= board.size) return 0
+
         val startX = x - 1
         val endX = startX + 3
         var count = 0
 
-        for (i in startX..endX - 1) {
-            val c = board[rowAbove][i]
+        for (i in startX until endX) {
+            val c = board[row][i]
             if (c == '*') {
                 count++
             }
         }
 
         return count
-
     }
 
 }

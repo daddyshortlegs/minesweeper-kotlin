@@ -48,6 +48,32 @@ class BoardTest {
     }
 
     @Test
+    fun `should not count below when bottom line`() {
+        val input = "....\n" +
+                "***.\n" +
+                "*...\n" +
+                "....\n"
+
+        val board = Board(input)
+        val result = board.countBelow(1, 3)
+
+        assertEquals(0, result)
+    }
+
+    @Test
+    fun `should not count above when on top line`() {
+        val input = "....\n" +
+                "***.\n" +
+                "*...\n" +
+                "....\n"
+
+        val board = Board(input)
+        val result = board.countAbove(1, 0)
+
+        assertEquals(0, result)
+    }
+
+    @Test
     fun `should count above`() {
         val input = "....\n" +
                 "***.\n" +
