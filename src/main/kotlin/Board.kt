@@ -115,9 +115,4 @@ class Board(private val input: String) {
         return result
     }
 
-
-
-
-
-
 }
