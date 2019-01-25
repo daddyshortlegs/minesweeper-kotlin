@@ -14,41 +14,28 @@ class BoardTest {
 
 
     @Test
-    fun calculateValue() {
+    fun `calculate value`() {
         val board = Board(".*.")
         val result = board.calculateAtPoint(charArrayOf('.', '*', '.', '*'), 2)
         assertEquals(2, result)
     }
 
     @Test
-    fun calculateValueOnLeftBounds() {
+    fun `calculate value on left bounds`() {
         val board = Board(".*.")
         val result = board.calculateAtPoint(charArrayOf('.', '*', '.', '*'), 0)
         assertEquals(1, result)
     }
 
     @Test
-    fun calculateValueOnRightBounds() {
+    fun `calculate value on right bounds`() {
         val board = Board(".*.")
         val result = board.calculateAtPoint(charArrayOf('.', '*', '*', '.'), 3)
         assertEquals(1, result)
     }
 
     @Test
-    fun countLineBelow() {
-        val input = "*...\n" +
-                "....\n" +
-                "*...\n" +
-                "....\n"
-
-        val board = Board(input)
-        val result = board.countBelow(1, 0)
-
-        assertEquals(0, result)
-    }
-
-    @Test
-    fun countLineBelowAgain() {
+    fun `should count below`() {
         val input = "....\n" +
                 "***.\n" +
                 "*...\n" +
@@ -56,6 +43,19 @@ class BoardTest {
 
         val board = Board(input)
         val result = board.countBelow(1, 0)
+
+        assertEquals(3, result)
+    }
+
+    @Test
+    fun `should count above`() {
+        val input = "....\n" +
+                "***.\n" +
+                "*...\n" +
+                "....\n"
+
+        val board = Board(input)
+        val result = board.countAbove(1, 2)
 
         assertEquals(3, result)
     }

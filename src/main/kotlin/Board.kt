@@ -70,4 +70,21 @@ class Board(private val input: String) {
         return count
     }
 
+    fun countAbove(x: Int, y: Int): Int {
+        val rowAbove = y - 1
+        val startX = x - 1
+        val endX = startX + 3
+        var count = 0
+
+        for (i in startX..endX - 1) {
+            val c = board[rowAbove][i]
+            if (c == '*') {
+                count++
+            }
+        }
+
+        return count
+
+    }
+
 }
