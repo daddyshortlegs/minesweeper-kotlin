@@ -73,6 +73,10 @@ class Board(private val input: String) {
             endX = startX + 2
         }
 
+        if (endX >= board[row].size) {
+            endX = board[row].size - 1
+        }
+
         var count = 0
 
         for (i in startX until endX) {

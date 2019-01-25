@@ -73,6 +73,19 @@ class BoardTest {
         assertEquals(2, result)
     }
 
+    @Test
+    fun `should count above and ignore right bound`() {
+        val input = "....\n" +
+                "***.\n" +
+                "*...\n" +
+                "....\n"
+
+        val board = Board(input)
+        val result = board.countAbove(3, 2)
+
+        assertEquals(1, result)
+    }
+
 
     @Test
     fun `should not count above when on top line`() {
