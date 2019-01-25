@@ -18,7 +18,7 @@ class BoardReaderTest {
                 ".*..\n" +
                 "....\n"
 
-        val input = "4 4\n" + expectedBoard
+        val input = "4 4\n" + expectedBoard + "0 0"
 
         var board = boardReader.readBoards(input)
 
@@ -35,7 +35,7 @@ class BoardReaderTest {
                 "...\n" +
                 ".*.\n"
 
-        val input = "3 5\n" + expectedBoard
+        val input = "5 3\n" + expectedBoard + "0 0"
 
         var board = boardReader.readBoards(input)
 
@@ -59,7 +59,7 @@ class BoardReaderTest {
                 ".*.\n"
 
         val input = "4 4\n" + board1 +
-                "3 5\n" + board2
+                "5 3\n" + board2 + "0 0"
 
         val boards = boardReader.readBoards(input)
 

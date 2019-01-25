@@ -9,25 +9,7 @@ class BoardReader {
         }
 
         val lines = cleanUpInput(input)
-
-        var index = 0
-
-        var boards: ArrayList<Board> = ArrayList()
-
-        do {
-            val line = lines[index]
-            val height = readDimensions(line)
-            index++
-
-            val board = readBoard(index, height, lines)
-
-            index += height
-
-
-            boards.add(board)
-        } while (index < lines.size)
-
-        return boards
+        return createBoards(lines)
     }
 
     private fun cleanUpInput(input: String): List<String> {
@@ -35,13 +17,31 @@ class BoardReader {
         return trimEnd.split("\n")
     }
 
+    private fun createBoards(lines: List<String>): ArrayList<Board> {
+        var index = 0
+        var boards: ArrayList<Board> = ArrayList()
+
+        do {
+            val line = lines[index]
+            val height = readDimensions(line)
+            if (height == 0) return boards
+            index++
+            val board = readBoard(index, height, lines)
+            index += height
+
+            boards.add(board)
+        } while (index < lines.size)
+        return boards
+    }
+
+
     private fun readDimensions(line: String): Int {
         val regex = Regex("([0-9]) ([0-9])")
         if (regex.matches(line)) {
             // is header
             val result = regex.find(line)
             if (result != null) {
-                var (width, height) = result.destructured
+                var (height, width) = result.destructured
                 return height.toInt()
             }
         }

@@ -15,7 +15,7 @@ class Board(private val input: String) {
         height = lines.size
         width = lines[0].length
 
-        board = Array(height, {CharArray(height)})
+        board = Array(height, {CharArray(width)})
 
         for (i in 0 until height) {
             for (j in 0 until width) {

@@ -5,7 +5,6 @@ import org.junit.Test
 class MinesweeperAcceptanceTest {
 
     @Test
-    @Ignore
     fun shouldProduceCorrectOutput() {
         var input = "4 4\n" +
                 "*...\n" +
@@ -30,7 +29,7 @@ class MinesweeperAcceptanceTest {
                 "Field #2:\n" +
                 "**100\n" +
                 "33200\n" +
-                "1*100";
+                "1*100\n"
 
         assertEquals(expectedOutput, actualOutput)
     }
