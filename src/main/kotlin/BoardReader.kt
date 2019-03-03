@@ -1,5 +1,7 @@
 class BoardReader {
 
+    private val BOARD_DIMENSIONS = Regex("([0-9]) ([0-9])")
+
     fun readBoards(input: String): List<Board> {
         if (input.isEmpty()) {
             throw NoBoardsException()
@@ -32,11 +34,10 @@ class BoardReader {
 
 
     private fun readDimensions(line: String): Int {
-        val regex = Regex("([0-9]) ([0-9])")
-        if (regex.matches(line)) {
-            val result = regex.find(line)
+        if (BOARD_DIMENSIONS.matches(line)) {
+            val result = BOARD_DIMENSIONS.find(line)
             if (result != null) {
-                var (height, width) = result.destructured
+                var (height, _) = result.destructured
                 return height.toInt()
             }
         }

@@ -28,17 +28,24 @@ class Board(private val input: String) {
 
     fun generate(): String {
         for (y in 0 until height) {
-            for (x in 0 until width) {
-                var count = countAbove(x, y)
-                count += countBelow(x, y)
-                count += countSides(x, y)
-
-                if (board[y][x] != '*') {
-                    board[y][x] = convertIntToChar(count)
-                }
-            }
+            scoreRow(y)
         }
         return toString()
+    }
+
+    private fun scoreRow(y: Int) {
+        for (x in 0 until width) {
+            var count = countAbove(x, y)
+            count += countBelow(x, y)
+            count += countSides(x, y)
+            placeNumberAtPosition(x, y, count)
+        }
+    }
+
+    private fun placeNumberAtPosition(x: Int, y: Int, count: Int) {
+        if (board[y][x] != '*') {
+            board[y][x] = convertIntToChar(count)
+        }
     }
 
     fun countAbove(x: Int, y: Int): Int {
@@ -85,16 +92,12 @@ class Board(private val input: String) {
     }
 
     private fun countLeft(x: Int, y: Int): Int {
-        if (x > 0) {
-            if (countSide(x - 1, y)) return 1
-        }
+        if (x > 0 && countSide(x - 1, y)) return 1
         return 0
     }
 
     private fun countRight(x: Int, y: Int): Int {
-        if (x < board[y].size - 1) {
-            if (countSide(x + 1, y)) return 1
-        }
+        if (x < board[y].size - 1 && countSide(x + 1, y)) return 1
         return 0
     }
 
