@@ -35,9 +35,7 @@ class Board(private val input: String) {
 
     private fun scoreRow(y: Int) {
         for (x in 0 until width) {
-            var count = countAbove(x, y)
-            count += countBelow(x, y)
-            count += countSides(x, y)
+            val count = countAbove(x, y) + countBelow(x, y) + countSides(x, y)
             placeNumberAtPosition(x, y, count)
         }
     }
@@ -48,13 +46,9 @@ class Board(private val input: String) {
         }
     }
 
-    fun countAbove(x: Int, y: Int): Int {
-        return countRow(x, y - 1)
-    }
+    fun countAbove(x: Int, y: Int): Int = countRow(x, y - 1)
 
-    fun countBelow(x: Int, y: Int): Int {
-        return countRow(x, y + 1)
-    }
+    fun countBelow(x: Int, y: Int): Int = countRow(x, y + 1)
 
     private fun countRow(x: Int, row: Int): Int {
         if (row < 0) return 0
@@ -85,11 +79,7 @@ class Board(private val input: String) {
         return count
     }
 
-    fun countSides(x: Int, y: Int) : Int {
-        var count = countLeft(x, y)
-        count += countRight(x, y)
-        return count
-    }
+    fun countSides(x: Int, y: Int) : Int = countLeft(x, y) + countRight(x, y)
 
     private fun countLeft(x: Int, y: Int): Int {
         if (x > 0 && countSide(x - 1, y)) return 1
@@ -101,12 +91,7 @@ class Board(private val input: String) {
         return 0
     }
 
-    private fun countSide(x: Int, y: Int): Boolean {
-        if (board[y][x] == '*') {
-            return true
-        }
-        return false
-    }
+    private fun countSide(x: Int, y: Int): Boolean = board[y][x] == '*'
 
     fun convertIntToChar(count: Int) = Integer.toString(count).single()
 
